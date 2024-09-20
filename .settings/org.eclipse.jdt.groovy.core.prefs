@@ -1,0 +1,3 @@
+eclipse.preferences.version=1
+groovy.script.filters=src/main/resources/**/*.groovy,y
+org.codehaus.groovy.eclipse.preferences.compiler.project=true

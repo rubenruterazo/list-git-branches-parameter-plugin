@@ -1,20 +1,27 @@
-import hudson.Extension
-import hudson.model.Descriptor
-import hudson.util.FormValidation
-import jenkins.model.GlobalConfiguration
-import org.kohsuke.stapler.DataBoundConstructor
-import org.kohsuke.stapler.QueryParameter
-import org.apache.commons.io.IOUtils
-import javax.servlet.ServletException
-import java.security.KeyStore
-import java.security.cert.CertificateFactory
-import java.security.cert.X509Certificate
-import javax.net.ssl.TrustManagerFactory
-import javax.net.ssl.SSLContext
-import java.nio.file.Files
-import java.nio.file.Paths
-import org.kohsuke.stapler.StaplerRequest
-import net.sf.json.JSONObject
+package com.syhuang.hudson.plugins.listgitbranchesparameter;
+
+import hudson.Extension;
+import hudson.model.Descriptor;
+import hudson.util.FormValidation;
+import jenkins.model.GlobalConfiguration;
+import org.kohsuke.stapler.DataBoundConstructor;
+import org.kohsuke.stapler.QueryParameter;
+import org.apache.commons.io.IOUtils;
+import javax.servlet.ServletException;
+import java.security.KeyStore;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
+import javax.net.ssl.TrustManagerFactory;
+import javax.net.ssl.SSLContext;
+
+import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import org.kohsuke.stapler.StaplerRequest;
+import net.sf.json.JSONObject;
 
 @Extension
 public class CertificateUploader extends GlobalConfiguration {
@@ -28,6 +35,10 @@ public class CertificateUploader extends GlobalConfiguration {
         if (uploadedCertificate != null && !uploadedCertificate.isEmpty()) {
             addCertificateToTrustStore(uploadedCertificate);
         }
+    }
+
+    public CertificateUploader() {
+        
     }
 
     public String getUploadedCertificate() {
